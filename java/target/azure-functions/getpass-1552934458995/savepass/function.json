@@ -1,0 +1,23 @@
+{
+  "scriptFile" : "..\\getpass-1.0-SNAPSHOT.jar",
+  "entryPoint" : "org.hphc.poc.passkit.function.SaveNewPass.run",
+  "bindings" : [ {
+    "type" : "httpTrigger",
+    "direction" : "in",
+    "name" : "req",
+    "route" : "hphc/savenewpass",
+    "methods" : [ "POST" ],
+    "authLevel" : "ANONYMOUS"
+  }, {
+    "type" : "cosmosDB",
+    "direction" : "out",
+    "name" : "database",
+    "databaseName" : "hphc-poc-cosmo1",
+    "connectionStringSetting" : "hphc-poc-passkit-db_DOCUMENTDB",
+    "collectionName" : "cosmo-coll1"
+  }, {
+    "type" : "http",
+    "direction" : "out",
+    "name" : "$return"
+  } ]
+}

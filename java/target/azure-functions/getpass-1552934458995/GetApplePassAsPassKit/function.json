@@ -1,0 +1,24 @@
+{
+  "scriptFile" : "..\\getpass-1.0-SNAPSHOT.jar",
+  "entryPoint" : "org.hphc.poc.passkit.function.GetPass.run",
+  "bindings" : [ {
+    "type" : "httpTrigger",
+    "direction" : "in",
+    "name" : "req",
+    "route" : "applepass/v1/passes/{passTypeIdentifier}/{passSerialNumber}",
+    "methods" : [ "GET" ],
+    "authLevel" : "ANONYMOUS"
+  }, {
+    "type" : "cosmosDB",
+    "direction" : "in",
+    "name" : "database",
+    "databaseName" : "hphc-poc-cosmo1",
+    "sqlQuery" : "select * from Items r where r.serialNumber= {passSerialNumber} and r.docType='applepass'",
+    "connectionStringSetting" : "hphc-poc-passkit-db_DOCUMENTDB",
+    "collectionName" : "cosmo-coll1"
+  }, {
+    "type" : "http",
+    "direction" : "out",
+    "name" : "$return"
+  } ]
+}
